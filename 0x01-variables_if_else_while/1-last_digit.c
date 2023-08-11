@@ -3,31 +3,31 @@
 #include <stdio.h>
 
 /**
- * main - Entry point
+ * main - Entry point '(0-positive_or_negative)'
  * Description: 'get the last digit of a number positive_or_negative'
- * Return: Always (0)
+ * Return: Always (success)
  *
  */
 
 int main(void)
 {
-	int n, lastd;
+	int n, ld;
 
 	srand(time(0));
 	n = rand() - RAND_MAX / 2;
-	lastd = n % 10;
+	ld = n % 10;
 
-	if (lastd > 5)
+	if (ld > 5)
 	{
-	printf("last digit of %d is %d and is greater than 5", n, lastd);
+	printf("last digit of %d is %d and is greater than 5", n, ld);
 	}
-	else if (lastd == 0)
+	else if (ld == 0)
 	{
-	printf("last digit of %d is %d and is 0", n, lastd);
+	printf("last digit of %d is %d and is 0", n, ld);
 	}
 	else
 	{
-	printf("last digit of %d is %d and is less than 6 and not 0", n, lastd);
+	printf("last digit of %d is %d and is less than 6 and not 0", n, ld);
 	}
 	return (0);
 }
