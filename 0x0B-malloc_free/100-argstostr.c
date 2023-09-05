@@ -1,75 +1,49 @@
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
-#include <string.h>
 
 /**
- * argstostr - Concatenate all arguments with newlines
- * @ac: Argument count
- * @av: Argument vector (array of strings)
- *
- * Return: A pointer to the concatenated string, or NULL on failure
- */
+* argstostr - concatenates all program arguments into a single string
+* @ac: the number of arguements
+* @av: an array of argument strings
+* Return: Pointer to the concatenated string, otherwise 0
+*/
 char *argstostr(int ac, char **av)
 {
-	int i, j, len = 0, total_len = 0;
-	char *str;
+	int i, j;
+	int total_len = 0;
+	char *res = (char *)malloc((total_len + 1) * sizeof(char));
+	int position = 0;
 
 	if (ac == 0 || av == NULL)
-	return (NULL);
-
-	/* Calculate the total length of the concatenated string */
-	for (i = 0; i < ac; i++)
-	for (j = 0; av[i][j]; j++)
-	total_len++;
-
-	/* Add space for newline characters */
-	total_len += ac - 1;
-
-	/* Allocate memory for the concatenated string */
-	str = malloc(total_len + 1);
-
-	if (str == NULL)
-	return (NULL);
-
-	/* Copy arguments into the concatenated string with newlines */
-	len = 0;
+	{
+		return (NULL);
+	}
 	for (i = 0; i < ac; i++)
 	{
-	for (j = 0; av[i][j]; j++)
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			total_len++;
+			j++;
+		}
+		total_len++;
+	}
+	if (res == NULL)
 	{
-	str[len++] = av[i][j];
+		return (NULL);
 	}
-
-	if (i < ac - 1)
+	for (i = 0; i < ac; i++)
 	{
-	str[len++] = '\n';
+		j = 0;
+		while (av[i][j] != '\0')
+		{
+			res[position] = av[i][j];
+			position++;
+			j++;
+		}
+		res[position] = '\n';
+		position++;
 	}
-	}
-
-	/* Null-terminate the concatenated string */
-	str[len] = '\0';
-
-	return (str);
-}
-
-int main(void)
-{
-	char *s;
-
-
-	char *arguments[] = {"Hello", "World", "Concatenate", "Me"};
-
-	char *result = argstostr(4, arguments);
-
-	if (result != NULL)
-	{
-	printf("Concatenated string:\n%s\n", result);
-	free(result);
-	}
-	else
-	{
-	printf("Failed to allocate memory.\n");
-	}
-
-	return (0);
+	res[position] = '\0';
+	return (res);
 }
